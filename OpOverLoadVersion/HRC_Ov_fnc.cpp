@@ -46,7 +46,7 @@ std::string HeartRates::getLastName() const{
 void HeartRates::setBirthDay(int day){
 /* exception for invalid day */
 
-	if ( (getBirthMonth() == 4) || (getBirthMonth() == 6) || (getBirthMonth() == 9)
+/*	if ( (getBirthMonth() == 4) || (getBirthMonth() == 6) || (getBirthMonth() == 9)
 		|| (getBirthMonth() == 11) ){
 		if ( (day<1) || (day>30) ){
 			throw std::invalid_argument("Invalid birth day entered");
@@ -64,7 +64,7 @@ void HeartRates::setBirthDay(int day){
 				throw std::invalid_argument("Invalid Birth Day enetered");
 			}
 		}
-	}
+	} */
 /* end of exception code */
 
 	BirthDay = day;
@@ -72,20 +72,43 @@ void HeartRates::setBirthDay(int day){
 }
 
 int HeartRates::getBirthDay() const{
+//insert exception	
+	if ( (getBirthMonth() == 4) || (getBirthMonth() == 6) || (getBirthMonth() == 9)
+		|| (getBirthMonth() == 11) ){
+		if ( (BirthDay<1) || (BirthDay>30) ){
+			throw std::invalid_argument("Invalid birth day entered");
+		}
+	}
+
+
+	if (getBirthMonth()==2){
+		if (getBirthYear()%4 != 0){
+			if ( (BirthDay<1) || (BirthDay>28) ){
+				throw std::invalid_argument("Invalid Birth Day entered");
+			}
+		} else {
+			if ( (BirthDay<1) || (BirthDay>29) ){
+				throw std::invalid_argument("Invalid Birth Day enetered");
+			}
+		}
+	}
 	return BirthDay;
 }
 
 void HeartRates::setBirthMonth(int month){
 //exception for invalid month
-	if ( (month<1) || (month>12) ){
+/*	if ( (month<1) || (month>12) ){
 		throw std::invalid_argument("Invalid birth month entered");
 	}
-
+*/
 	BirthMonth = month;
 	return;
 }
 
 int HeartRates::getBirthMonth() const{
+	if ( (BirthMonth<1) || (BirthMonth>12) ){
+		throw std::invalid_argument("Invalid birth month entered");
+	}
 	return BirthMonth;
 }
 
